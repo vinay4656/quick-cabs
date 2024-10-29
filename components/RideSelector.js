@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import ethLogo from '../assets/eth-logo.png'
 import { useEffect, useContext, useState } from 'react'
-import { GlobalContext } from '../context/GlobalContext'
+import { RideContext } from '../context/RideContext'
 
 const style = {
   wrapper: `h-full flex flex-col`,
@@ -21,8 +21,7 @@ const style = {
 
 const RideSelector = () => {
   const [carList, setCarList] = useState([])
-  const { selectedRide, setSelectedRide, setPrice, basePrice } =
-    useContext(GlobalContext)
+  const { selectedRide, setSelectedRide, setPrice, basePrice } = useContext(RideContext)
 
   console.log(basePrice)
 
