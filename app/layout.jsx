@@ -2,8 +2,8 @@ import "./global.css";
 import { GlobalProvider } from "../context/GlobalContext";
 
 export const metadata = {
-  title: "Briefly",
-  description: "Briefly",
+  title: "QuickCabs",
+  description: "QuickCabs",
 };
 
 export default function RootLayout({

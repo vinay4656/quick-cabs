@@ -12,6 +12,7 @@
     "@faker-js/faker": "^6.0.0-alpha.7",
     "@sanity/client": "^3.1.0",
     "ethers": "^5.5.4",
+    "lucide-react": "^0.454.0",
     "mapbox-gl": "^2.7.0",
     "next": "15.0.1",
     "react": "18.3.1",
