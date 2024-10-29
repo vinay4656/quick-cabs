@@ -1,3 +1,5 @@
+"use client"
+
 import Image from 'next/image'
 import ethLogo from '../assets/eth-logo.png'
 import { useEffect, useContext, useState } from 'react'

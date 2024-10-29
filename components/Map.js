@@ -1,42 +1,46 @@
-import { useEffect, useContext } from 'react'
+'use client'
+import { useEffect, useRef } from 'react'
 import mapboxgl from 'mapbox-gl'
-import { GlobalContext } from '../context/GlobalContext'
+import 'mapbox-gl/dist/mapbox-gl.css'
 
 const style = {
-  wrapper: `flex-1 h-full w-full`,
+  wrapper: `flex-1 h-full w-full`
 }
 
-mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN
-
 const Map = () => {
-  const { pickupCoordinates, dropoffCoordinates } = useContext(GlobalContext)
+  const mapContainer = useRef(null)
+  const map = useRef(null)
 
   useEffect(() => {
-    const map = new mapboxgl.Map({
-      container: 'map',
-      style: 'mapbox://styles/drakosi/ckvcwq3rwdw4314o3i2ho8tph',
-      center: [-99.29011, 39.39172],
-      zoom: 3,
-    })
+    // Check if we already have a map instance
+    if (map.current) return
 
-    if (pickupCoordinates) {
-      addToMap(map, pickupCoordinates)
-    }
+    try {
+      // Use Mapbox default public token
+      mapboxgl.accessToken = 'pk.eyJ1IjoidmluYXkyNjQ2IiwiYSI6ImNtMnVrdGZiMDAybTYycnF2ZGVmcTA3cXMifQ.jRSfhVRyqOcupIY2G4hQLA'
 
-    if (dropoffCoordinates) {
-      addToMap(map, dropoffCoordinates)
-    }
-
-    if (pickupCoordinates && dropoffCoordinates) {
-      map.fitBounds([dropoffCoordinates, pickupCoordinates], {
-        padding: 400,
+      // Create new map instance
+      map.current = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v12',
+        center: [78.9629, 20.5937], // India coordinates
+        zoom: 4
       })
-    }
-  }, [pickupCoordinates, dropoffCoordinates])
 
-  const addToMap = (map, coordinates) => {
-    const marker1 = new mapboxgl.Marker().setLngLat(coordinates).addTo(map)
-  }
+      // Add navigation controls
+      map.current.addControl(new mapboxgl.NavigationControl())
+
+    } catch (error) {
+      console.error('Error initializing map:', error)
+    }
+
+    // Cleanup
+    return () => {
+      if (map.current) {
+        map.current.remove()
+      }
+    }
+  }, [])
 
   return <div className={style.wrapper} id='map' />
 }
