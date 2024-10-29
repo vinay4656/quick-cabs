@@ -1,7 +1,24 @@
+'use client'
+
 import { createContext, useState, useEffect } from 'react'
 import { faker } from '@faker-js/faker'
 
-export const GlobalContext = createContext()
+
+const initialState = {
+  pickup: '',
+  dropoff: '',
+  pickupCoordinates: undefined,
+  dropoffCoordinates: undefined,
+  currentAccount: undefined,
+  currentUser: [],
+  selectedRide: [],
+  price: undefined,
+  basePrice: undefined,
+  metamask: typeof window !== 'undefined' ? window.ethereum : undefined,
+}
+
+export const GlobalContext = createContext(initialState)
+
 
 export const GlobalProvider = ({ children }) => {
   const [pickup, setPickup] = useState('')
