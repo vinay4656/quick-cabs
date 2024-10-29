@@ -10,11 +10,16 @@ const style = {
   rideSelectorContainer: `h-full flex flex-col overflow-scroll`,
   confirmButtonContainer: `border-t-2 cursor-pointer z-10`,
   confirmButton: `bg-black text-white m-2 py-2 text-center text-lg 
-                  sm:m-4 sm:py-3 sm:text-xl`, // Adjust for larger screens
+                  sm:m-4 sm:py-3 sm:text-xl`,
 }
 
-
 const Confirm = () => {
+  const context = useContext(RideContext)
+
+  if (!context) {
+    return <div>Loading...</div>
+  }
+
   const {
     currentAccount,
     pickup,
@@ -24,7 +29,7 @@ const Confirm = () => {
     pickupCoordinates,
     dropoffCoordinates,
     metamask,
-  } = useContext(RideContext)
+  } = context
 
   const storeTripDetails = async (pickup, dropoff) => {
     try {
@@ -58,21 +63,21 @@ const Confirm = () => {
     }
   }
 
-  console.log({ pickup, dropoff, price, selectedRide });
+  if (!pickupCoordinates || !dropoffCoordinates) {
+    return <div>Please select pickup and dropoff locations</div>
+  }
 
   return (
     <div className={style.wrapper}>
       <div className={style.rideSelectorContainer}>
-        {pickupCoordinates && dropoffCoordinates && <RideSelector />}
+        <RideSelector />
       </div>
       <div className={style.confirmButtonContainer}>
-        <div className={style.confirmButtonContainer}>
-          <div
-            className={style.confirmButton}
-            onClick={() => storeTripDetails(pickup, dropoff)}
-          >
-            Confirm {selectedRide.service || 'Ride'}
-          </div>
+        <div
+          className={style.confirmButton}
+          onClick={() => storeTripDetails(pickup, dropoff)}
+        >
+          Confirm {selectedRide.service || 'Ride'}
         </div>
       </div>
     </div>

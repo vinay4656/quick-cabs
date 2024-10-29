@@ -2,7 +2,7 @@
 
 import { createContext, useState } from 'react'
 
-export const RideContext = createContext()
+export const RideContext = createContext(null)
 
 export const RideProvider = ({ children }) => {
   const [pickup, setPickup] = useState('')
@@ -14,27 +14,27 @@ export const RideProvider = ({ children }) => {
   const [selectedRide, setSelectedRide] = useState({})
   const [metamask, setMetamask] = useState()
 
+  const value = {
+    pickup,
+    setPickup,
+    dropoff,
+    setDropoff,
+    pickupCoordinates,
+    setPickupCoordinates,
+    dropoffCoordinates,
+    setDropoffCoordinates,
+    currentAccount,
+    setCurrentAccount,
+    price,
+    setPrice,
+    selectedRide,
+    setSelectedRide,
+    metamask,
+    setMetamask,
+  }
+
   return (
-    <RideContext.Provider
-      value={{
-        pickup,
-        setPickup,
-        dropoff,
-        setDropoff,
-        pickupCoordinates,
-        setPickupCoordinates,
-        dropoffCoordinates,
-        setDropoffCoordinates,
-        currentAccount,
-        setCurrentAccount,
-        price,
-        setPrice,
-        selectedRide,
-        setSelectedRide,
-        metamask,
-        setMetamask,
-      }}
-    >
+    <RideContext.Provider value={value}>
       {children}
     </RideContext.Provider>
   )
