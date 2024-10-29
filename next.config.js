@@ -2,7 +2,13 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['cdn.sanity.io'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',  // Replace with your specific domain(s)
+      },
+    ],
+    // Or if your images are local, you don't need remotePatterns at all
   },
 }
 

@@ -1,18 +1,24 @@
-'use client'
-
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { RideContext } from '../context/RideContext'
 import mapboxSdk from '@mapbox/mapbox-sdk/services/geocoding'
 
+const style = {
+  wrapper: `pt-2`,
+  searchHeader: `w-full font-bold text-left flex items-center text-2xl sm:text-3xl p-4 overflow-hidden`, // Adjust text size
+  inputBoxes: `flex flex-col mb-4 relative`,
+  inputBox: `h-8 sm:h-10 mx-4 border-2 bg-[#eeeeee] flex items-center my-1 py-1 px-2`, // Adjust height
+  focusedInputBox: `border-black`,
+  svgContainer: `mx-1`,
+  input: `my-2 rounded-2 p-2 outline-none border-none bg-transparent h-full w-full`,
+  verticalLine: `w-0 h-[1.5rem] sm:h-[2rem] border-black border absolute z-10 left-[2.3rem] top-[2rem]`, // Adjust height
+  suggestions: `absolute bg-white z-10 w-full top-[100%] mt-1 shadow-lg rounded-lg max-h-40 overflow-y-auto text-sm left-0`,
+  suggestionItem: `p-2 hover:bg-gray-200 cursor-pointer text-sm`,
+}
+
+
 const LocationSelector = () => {
   const [inFocus, setInFocus] = useState('from')
-  const context = useContext(RideContext)
-  
-  if (!context) {
-    return <div>Loading...</div>
-  }
-
-  const { pickup, setPickup, dropoff, setDropoff } = context
+  const { pickup, setPickup, dropoff, setDropoff } = useContext(RideContext)
   const [pickupSuggestions, setPickupSuggestions] = useState([])
   const [dropoffSuggestions, setDropoffSuggestions] = useState([])
 
@@ -50,17 +56,17 @@ const LocationSelector = () => {
   }
 
   return (
-    <div className="wrapper">
-      <div className="searchHeader">
+    <div className={style.wrapper}>
+      <div className={style.searchHeader}>
         {inFocus === 'from' ? 'Where can we pick you up?' : 'Where to?'}
       </div>
-      <div className="inputBoxes">
+      <div className={style.inputBoxes}>
         <div
-          className={`inputBox ${
-            inFocus === 'from' ? 'focusedInputBox' : ''
+          className={`${style.inputBox} ${
+            inFocus === 'from' && style.focusedInputBox
           }`}
         >
-          <div className="svgContainer">
+          <div className={style.svgContainer}>
             <svg viewBox='0 0 24 24' width='1em' height='1em'>
               <path
                 fillRule='evenodd'
@@ -70,7 +76,7 @@ const LocationSelector = () => {
             </svg>
           </div>
           <input
-            className="input"
+            className={style.input}
             placeholder='Enter pickup location'
             value={pickup}
             onChange={e => {
@@ -80,11 +86,11 @@ const LocationSelector = () => {
             onFocus={() => setInFocus('from')}
           />
           {pickupSuggestions.length > 0 && (
-            <div className="suggestions">
+            <div className={style.suggestions}>
               {pickupSuggestions.map((suggestion, index) => (
                 <div
                   key={index}
-                  className="suggestionItem"
+                  className={style.suggestionItem}
                   onClick={() => handleSuggestionClick(suggestion, 'from')}
                 >
                   {suggestion.place_name}
@@ -93,13 +99,13 @@ const LocationSelector = () => {
             </div>
           )}
         </div>
-        <div className="verticalLine" />
+        <div className={style.verticalLine} />
         <div
-          className={`inputBox ${
-            inFocus === 'to' ? 'focusedInputBox' : ''
+          className={`${style.inputBox} ${
+            inFocus === 'to' && style.focusedInputBox
           }`}
         >
-          <div className="svgContainer">
+          <div className={style.svgContainer}>
             <svg viewBox='0 0 24 24' width='1em' height='1em'>
               <path
                 fillRule='evenodd'
@@ -109,7 +115,7 @@ const LocationSelector = () => {
             </svg>
           </div>
           <input
-            className="input"
+            className={style.input}
             placeholder='Where to?'
             value={dropoff}
             onChange={e => {
@@ -119,11 +125,11 @@ const LocationSelector = () => {
             onFocus={() => setInFocus('to')}
           />
           {dropoffSuggestions.length > 0 && (
-            <div className="suggestions">
+            <div className={style.suggestions}>
               {dropoffSuggestions.map((suggestion, index) => (
                 <div
                   key={index}
-                  className="suggestionItem"
+                  className={style.suggestionItem}
                   onClick={() => handleSuggestionClick(suggestion, 'to')}
                 >
                   {suggestion.place_name}
@@ -133,82 +139,6 @@ const LocationSelector = () => {
           )}
         </div>
       </div>
-
-      <style jsx>{`
-        .wrapper {
-          border-radius: 8px;
-          padding: 24px;
-          background-color: white;
-        }
-
-        .searchHeader {
-          font-size: 1rem;
-          font-weight: 600;
-          margin-bottom: 16px;
-        }
-
-        .inputBoxes {
-          display: flex;
-          flex-direction: column;
-          gap: 16px;
-        }
-
-        .inputBox {
-          display: flex;
-          align-items: center;
-          background-color: #f5f5f5;
-          padding: 12px;
-          border-radius: 4px;
-          position: relative;
-        }
-
-        .focusedInputBox {
-          background-color: #eee;
-          border: 1px solid #000;
-        }
-
-        .svgContainer {
-          margin-right: 12px;
-        }
-
-        .input {
-          flex: 1;
-          border: none;
-          background: none;
-          outline: none;
-          font-size: 1rem;
-        }
-
-        .verticalLine {
-          width: 1px;
-          height: 24px;
-          background-color: #e0e0e0;
-          margin: 0 auto;
-        }
-
-        .suggestions {
-          position: absolute;
-          top: 100%;
-          left: 0;
-          right: 0;
-          background-color: white;
-          border: 1px solid #e0e0e0;
-          border-radius: 4px;
-          margin-top: 4px;
-          max-height: 200px;
-          overflow-y: auto;
-          z-index: 10;
-        }
-
-        .suggestionItem {
-          padding: 12px;
-          cursor: pointer;
-        }
-
-        .suggestionItem:hover {
-          background-color: #f5f5f5;
-        }
-      `}</style>
     </div>
   )
 }

@@ -1,5 +1,3 @@
-import Link from 'next/link';
-
 export default function HeroSection() {
   return (
     <div 
@@ -33,11 +31,9 @@ export default function HeroSection() {
 
           {/* CTA Button */}
           <div className="mt-10">
-            <Link href="/dashboard">
-              <button className="px-8 py-3 bg-[#CCFF00] text-black font-semibold rounded-lg hover:bg-[#A5CD1B] transition-all">
-                Book a Ride
-              </button>
-            </Link>
+            <button className="px-8 py-3 bg-[#CCFF00] text-black font-semibold rounded-lg hover:bg-[#A5CD1B] transition-all">
+              Book a Ride
+            </button>
           </div>
         </div>
 

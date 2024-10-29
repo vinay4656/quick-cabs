@@ -39,7 +39,7 @@ const Footer = () => {
           </div>
           <div className="mt-8 md:mt-0 flex justify-center w-full md:w-auto">
             <Image 
-              src="/images/" 
+              src="/images/pyusd.png" 
               alt="Footer Image"
               width={300} 
               height={300} 
