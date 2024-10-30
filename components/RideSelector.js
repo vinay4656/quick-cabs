@@ -22,14 +22,16 @@ const RideSelector = () => {
   const { selectedRide, setSelectedRide, setPrice, basePrice } =
     useContext(RideContext)
 
-  console.log(basePrice)
+  console.log(basePrice, 'basePrice')
 
   useEffect(() => {
     ;(async () => {
       try {
+        console.log('fetching ride types')
         const response = await fetch('/api/db/getRideTypes')
 
         const data = await response.json()
+        console.log('data', data)
         setCarList(data.data)
         setSelectedRide(data.data[0])
       } catch (error) {

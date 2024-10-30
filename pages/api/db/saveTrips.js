@@ -1,4 +1,4 @@
-import { client } from '../../../lib/sanity'
+import { client } from "@/lib/sanity";
 
 const saveTrips = async (req, res) => {
   try {
