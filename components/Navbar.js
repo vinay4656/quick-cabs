@@ -32,8 +32,8 @@ const Navbar = () => {
             objectFit="contain"
           />
         </div>
-        <div className={style.menuItem}>Ride</div>
-        <div className={style.menuItem}>Schedule</div>
+        <div className={style.menuItem}>Ride History</div>
+        <div className={style.menuItem}>Transactions</div>
         <div className={style.menuItem}>More</div>
       </div>
       <div className={style.rightMenu}>
