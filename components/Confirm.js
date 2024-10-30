@@ -7,8 +7,9 @@ const style = {
   wrapper: `flex-1 h-full flex flex-col justify-between`,
   rideSelectorContainer: `h-full flex flex-col overflow-scroll`,
   confirmButtonContainer: `border-t-2 cursor-pointer z-10`,
-  confirmButton: `bg-black text-white m-2 py-2 text-center text-lg 
-                  sm:m-4 sm:py-3 sm:text-xl`, // Adjust for larger screens
+  confirmButton: `bg-[#B7E41F] text-black m-2 py-2 text-center text-lg 
+                  sm:m-4 sm:py-3 sm:text-xl
+                  hover:bg-[#9bc219] transition-colors duration-200`, // Added hover effect
 }
 
 

@@ -6,11 +6,11 @@ const style = {
   wrapper: `pt-2`,
   searchHeader: `w-full font-bold text-left flex items-center text-2xl sm:text-3xl p-4 overflow-hidden`, // Adjust text size
   inputBoxes: `flex flex-col mb-4 relative`,
-  inputBox: `h-8 sm:h-10 mx-4 border-2 bg-[#eeeeee] flex items-center my-1 py-1 px-2`, // Adjust height
+  inputBox: `h-12 sm:h-14 mx-4 border-2 bg-[#eeeeee] flex items-center my-1 py-1 px-2`, // Increased height from h-8/h-10 to h-12/h-14
   focusedInputBox: `border-[#B7E41F]`,
   svgContainer: `mx-1`,
   input: `my-2 rounded-2 p-2 outline-none border-none bg-transparent h-full w-full`,
-  verticalLine: `w-0 h-[1.5rem] sm:h-[2rem] border-black border absolute z-10 left-[2.3rem] top-[2rem]`, // Adjust height
+  verticalLine: `w-0 h-[2rem] sm:h-[2.5rem] border-black border absolute z-10 left-[2.3rem] top-[2rem]`, // Adjusted vertical line height to match
   suggestions: `absolute bg-white z-10 w-full top-[100%] mt-1 shadow-lg rounded-lg max-h-40 overflow-y-auto text-sm left-0`,
   suggestionItem: `p-2 hover:bg-gray-200 cursor-pointer text-sm`,
 }
