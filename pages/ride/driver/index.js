@@ -17,8 +17,9 @@ const Dashboard = () => {
               
               {/* Main Balance */}
               <div className="flex items-baseline gap-2 mb-6">
-                <span className="text-5xl font-normal">29,475.00</span>
-                <span className="text-xl text-gray-500">USD</span>
+                <span className="text-5xl font-normal">02.475</span>
+                <span className="text-xl text-gray-500">PYUSD</span>
+                <img src="/images/27772.png" alt="PYUSD" className="w-6 h-6 ml-2" />
               </div>
 
               {/* Action Buttons */}
