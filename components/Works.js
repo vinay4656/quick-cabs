@@ -4,9 +4,9 @@ import Image from 'next/image';
 
 const Works = () => {
   return (
-    <div className="max-w-6xl mx-auto px-4 py-12 space-y-24 m-11 ">
+    <div className="max-w-6xl mx-auto px-4 py-12 space-y-24 m-11">
       {/* How it Works Section */}
-      <section className="grid md:grid-cols-2 gap-12 items-center">
+      <section className="grid md:grid-cols-2 gap-12 items-center py-12">
         <div className="order-2 md:order-1">
           <Image 
             src="/images/laptop.png" 

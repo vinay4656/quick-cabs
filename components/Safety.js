@@ -7,7 +7,7 @@ const Safety = () => {
     <div className="bg-white">
       <div className="max-w-6xl mx-auto px-4 py-12 space-y-24">
         {/* Safety Section */}
-        <section className="grid md:grid-cols-2 gap-12 items-center">
+        <section className="grid md:grid-cols-2 gap-12 items-center py-12">
           <div className="space-y-8">
             <h2 className="text-4xl font-bold text-gray-800">
               We care about <span className="bg-lime-300">safety</span>
