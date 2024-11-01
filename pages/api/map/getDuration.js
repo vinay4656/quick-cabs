@@ -15,9 +15,10 @@ async function handlePost(req, res) {
 
   try {
     const response = await fetch(mapboxUrl)
-    const data = await response.json()
+    const data = await response.json();
+    console.log(data, "data from getDuration");
 
-    res.status(200).send({ message: 'success', data: data.routes[0].duration })
+    res.status(200).send({ message: "success", data: data.routes[0].duration });
   } catch (error) {
     res.status(500).send({ message: 'error', data: error.message })
   }

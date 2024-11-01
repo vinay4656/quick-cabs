@@ -1,6 +1,7 @@
 "use client"
 
 import { createContext, useState, useEffect } from 'react'
+import { faker } from '@faker-js/faker'
 
 export const RideContext = createContext({
   pickup: '',
@@ -29,25 +30,80 @@ export const RideContext = createContext({
 export const RideProvider = ({ children }) => {
   const [pickup, setPickup] = useState('')
   const [dropoff, setDropoff] = useState('')
-  const [pickupCoordinates, setPickupCoordinates] = useState(null)
-  const [dropoffCoordinates, setDropoffCoordinates] = useState(null)
-  const [currentAccount, setCurrentAccount] = useState(null)
-  const [price, setPrice] = useState('')
-  const [selectedRide, setSelectedRide] = useState({})
-  const [metamask, setMetamask] = useState(null)
-  const [currentUser, setCurrentUser] = useState(null)
-  const [basePrice, setBasePrice] = useState('0')
+  const [pickupCoordinates, setPickupCoordinates] = useState()
+  const [dropoffCoordinates, setDropoffCoordinates] = useState()
+  const [currentAccount, setCurrentAccount] = useState()
+  const [currentUser, setCurrentUser] = useState([])
+  const [selectedRide, setSelectedRide] = useState([])
+  const [price, setPrice] = useState()
+  const [basePrice, setBasePrice] = useState()
+
+  let metamask
+
+  if (typeof window !== 'undefined') {
+    metamask = window.ethereum
+  }
+
+  useEffect(() => {
+    checkIfWalletIsConnected()
+  }, [])
+
+  useEffect(() => {
+    if (!currentAccount) return
+    requestToGetCurrentUsersInfo(currentAccount)
+  }, [currentAccount])
+
+  useEffect(() => {
+    if (!pickupCoordinates || !dropoffCoordinates) return
+    ;(async () => {
+      try {
+        const response = await fetch('/api/map/getDuration', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            pickupCoordinates: `${pickupCoordinates[0]},${pickupCoordinates[1]}`,
+            dropoffCoordinates: `${dropoffCoordinates[0]},${dropoffCoordinates[1]}`,
+          }),
+        })
+
+        const data = await response.json();
+        console.log(data, "data from getDuration");
+        setBasePrice(Math.round(await data.data));
+      } catch (error) {
+        console.error(error)
+      }
+    })()
+  }, [pickupCoordinates, dropoffCoordinates])
+
+  const checkIfWalletIsConnected = async () => {
+    if (!window.ethereum) return
+    try {
+      const addressArray = await window.ethereum.request({
+        method: 'eth_accounts',
+      })
+
+      if (addressArray.length > 0) {
+        setCurrentAccount(addressArray[0])
+        requestToCreateUserOnSanity(addressArray[0])
+      }
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   const connectWallet = async () => {
+    if (!window.ethereum) return
     try {
-      if (!window.ethereum) return alert('Please install MetaMask')
-      
-      const accounts = await window.ethereum.request({
+      const addressArray = await window.ethereum.request({
         method: 'eth_requestAccounts',
       })
-      
-      setCurrentAccount(accounts[0])
-      setMetamask(window.ethereum)
+
+      if (addressArray.length > 0) {
+        setCurrentAccount(addressArray[0])
+        requestToCreateUserOnSanity(addressArray[0])
+      }
     } catch (error) {
       console.error(error)
     }
@@ -88,30 +144,6 @@ export const RideProvider = ({ children }) => {
     })
   }
 
-
-  useEffect(() => {
-    if (!pickupCoordinates || !dropoffCoordinates) return
-    ;(async () => {
-      try {
-        const response = await fetch('/api/map/getDuration', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            pickupCoordinates: `${pickupCoordinates[0]},${pickupCoordinates[1]}`,
-            dropoffCoordinates: `${dropoffCoordinates[0]},${dropoffCoordinates[1]}`,
-          }),
-        })
-
-        const data = await response.json()
-        setBasePrice(Math.round(await data.data))
-      } catch (error) {
-        console.error(error)
-      }
-    })()
-  }, [pickupCoordinates, dropoffCoordinates])
-
   useEffect(() => {
     if (pickup && dropoff) {
       ;(async () => {
@@ -123,32 +155,59 @@ export const RideProvider = ({ children }) => {
     } else return
   }, [pickup, dropoff])
 
-  const value = {
-    pickup,
-    setPickup,
-    dropoff,
-    setDropoff,
-    pickupCoordinates,
-    setPickupCoordinates,
-    dropoffCoordinates,
-    setDropoffCoordinates,
-    currentAccount,
-    setCurrentAccount,
-    price,
-    setPrice,
-    selectedRide,
-    setSelectedRide,
-    metamask,
-    setMetamask,
-    currentUser,
-    setCurrentUser,
-    connectWallet,
-    basePrice,
-    setBasePrice
+  const requestToCreateUserOnSanity = async address => {
+    if (!window.ethereum) return
+    try {
+      await fetch('/api/db/createUser', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userWalletAddress: address,
+          name: faker.name.findName(),
+        }),
+      })
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const requestToGetCurrentUsersInfo = async walletAddress => {
+    try {
+      const response = await fetch(
+        `/api/db/getUserInfo?walletAddress=${walletAddress}`,
+      )
+
+      const data = await response.json()
+      setCurrentUser(data.data)
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   return (
-    <RideContext.Provider value={value}>
+    <RideContext.Provider
+      value={{
+        pickup,
+        setPickup,
+        dropoff,
+        setDropoff,
+        pickupCoordinates,
+        setPickupCoordinates,
+        dropoffCoordinates,
+        setDropoffCoordinates,
+        connectWallet,
+        currentAccount,
+        currentUser,
+        selectedRide,
+        setSelectedRide,
+        price,
+        setPrice,
+        basePrice,
+        metamask,
+      }}
+    >
       {children}
     </RideContext.Provider>
   )
