@@ -4,6 +4,7 @@ import Header from "@/components/Header"
 import Hero from "@/components/Hero"
 import Safety from "@/components/safety"
 import Works from "@/components/works"
+import Feature1 from "@/components/Feature1"
 
 export default function Home() {
   return (
@@ -11,8 +12,9 @@ export default function Home() {
       <Header />
       <Hero />
       <Feature />
-      <Safety/>
-      <Works/>
+      <Feature1 />
+      {/* <Safety/> */}
+      {/* <Works/> */}
       <Footer />
     </div>
   )
