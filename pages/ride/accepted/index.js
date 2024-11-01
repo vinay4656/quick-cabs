@@ -14,6 +14,7 @@ const style = {
   driverCard: `bg-gray-50 p-4 rounded-lg mb-6`,
   driverInfo: `flex items-center gap-4`,
   driverImage: `w-16 h-16 rounded-full`,
+  verifiedBadge: `h-8 w-12 ml-4 -mt-4`,
   driverDetails: `flex-1`,
   driverName: `text-xl font-semibold`,
   carInfo: `text-gray-600 flex items-center justify-between`,
@@ -42,12 +43,20 @@ export default function Home() {
 
           <div className={style.driverCard}>
             <div className={style.driverInfo}>
-              <img 
-                src="../images/Captain.jpg" 
-                className={style.driverImage}
-                alt="Driver"
-                width={64}
-              />
+              <div className="relative">
+                <img 
+                  src="../images/Captain.jpg" 
+                  className={style.driverImage}
+                  alt="Driver"
+                  width={64}
+                />
+                <img 
+                  src="../images/car.png" 
+                  className={style.verifiedBadge}
+                  alt="Verified Driver"
+                  width={24}
+                />
+              </div>
               <div className={style.driverDetails}>
                 <h3 className={style.driverName}>Pavan Gowda</h3>
                 <div className={style.carInfo}>
