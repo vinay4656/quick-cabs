@@ -39,7 +39,11 @@ const Works = () => {
             ))}
           </div>
           
-          <button className="bg-lime-300 px-6 py-3 rounded-lg font-semibold text-gray-800 hover:bg-lime-400 transition-colors">
+          <button 
+            className="bg-lime-300 px-6 py-3 rounded font-semibold text-gray-800 hover:bg-lime-400 transition-colors"
+            onClick={() => window.location.href = '/ride'}
+          
+          >
             Book a Ride
           </button>
         </div>
