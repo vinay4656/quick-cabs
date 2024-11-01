@@ -10,7 +10,7 @@ export default function Header() {
   };
 
   return (
-    <header className="bg-white text-black font-jeko shadow-md">
+    <header className="text-black font-jeko shadow-md" >
       <nav className="container mx-auto px-6 py-4 flex justify-between items-center max-w-7xl">
         <div className="flex items-center space-x-4">
           <Image
@@ -23,7 +23,7 @@ export default function Header() {
         </div>
         <div className="hidden md:flex space-x-8">
           <Link href="/login" legacyBehavior>
-            <button className="transition duration-300 text-black hover:text-gray-500 hover:underline focus:outline-none">
+            <button className="transition duration-300 text-[#323942] hover:text-[#000000]  focus:outline-none">
               Log in
             </button>
           </Link>
@@ -64,11 +64,7 @@ export default function Header() {
               Log in
             </button>
           </Link>
-          <Link href="/signup" legacyBehavior>
-            <button className="block bg-[#CCFF00] text-black px-6 py-2 rounded transition duration-300 hover:bg-green-500 hover:text-white focus:outline-none">
-              Sign up
-            </button>
-          </Link>
+
         </div>
       )}
     </header>
