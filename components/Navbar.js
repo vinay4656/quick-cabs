@@ -34,8 +34,8 @@ const Navbar = () => {
           />
         </div>
         <div className={style.menuItem}>Ride History</div>
-        <div className={style.menuItem}>Transactions</div>
-        <div className={style.menuItem}>More</div>
+        {/* <div className={style.menuItem}>Transactions</div>
+        <div className={style.menuItem}>More</div> */}
       </div>
       <div className={style.rightMenu}>
         <div className={style.menuItem}>Help</div>
