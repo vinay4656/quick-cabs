@@ -17,8 +17,9 @@ const Dashboard = () => {
               
               {/* Main Balance */}
               <div className="flex items-baseline gap-2 mb-6">
-                <span className="text-5xl font-normal">29,475.00</span>
-                <span className="text-xl text-gray-500">USD</span>
+                <span className="text-5xl font-normal">02.475</span>
+                <span className="text-xl text-gray-500">PYUSD</span>
+                <img src="/images/27772.png" alt="PYUSD" className="w-6 h-6 ml-2" />
               </div>
 
               {/* Action Buttons */}
@@ -33,12 +34,12 @@ const Dashboard = () => {
             </div>
 
             {/* Referral Card */}
-            <div className="bg-black text-white rounded-xl p-8">
+            <div className="bg-gradient-to-bl from-[#C1F11D] to-teal-100 text-black rounded-xl p-8">
               <div className="mb-6">
-                <p className="text-lg">Connect to your wallet</p>
+                <p className="text-lg font-semibold">Connect to your wallet</p>
               </div>
-              <div className="flex items-center gap-2 bg-gray-800 rounded-lg p-3">
-                <span className="flex-grow">0xD1873F8B9916148Aae2306A145A052F5be8a5C6b</span>
+              <div className="flex items-center gap-2 bg-white/40 border border-white rounded-lg p-3">
+                <span className="flex-grow">0xD1873F8B9916148Aae6A145A052F5be</span>
                 <button className="p-2">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />

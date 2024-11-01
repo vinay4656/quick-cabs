@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import avatar from '../temp/avatar.jpg'
+import avatar from '../temp/Captain.jpg'
 import { BsPerson } from 'react-icons/bs'
 import { useContext } from 'react'
 import { RideContext } from '../context/RideContext'
@@ -45,7 +45,7 @@ const Navbar = () => {
       </div>
       <div className={style.rightMenu}>
         <div className={`${style.menuItem} text-red-600`}>Logout</div>
-        <div className={`${style.menuItem}`}>{currentUser?.name ? currentUser.name.split(' ')[0] : 'Guest'}</div>
+        <div className={`${style.menuItem}`}>{currentUser?.name ? currentUser.name.split(' ')[0] : 'Hi Captain'}</div>
         <div className={style.userImageContainer}>
           <Image
             className={style.userImage}
