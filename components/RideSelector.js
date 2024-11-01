@@ -1,7 +1,7 @@
-import Image from 'next/image'
-import ethLogo from '../assets/eth-logo.png'
-import { useEffect, useContext, useState } from 'react'
-import { RideContext } from '../context/RideContext'
+import Image from "next/image";
+import ethLogo from "../assets/eth-logo.png";
+import { useEffect, useContext, useState } from "react";
+import { RideContext } from "../context/RideContext";
 
 const style = {
   wrapper: `h-full flex flex-col border-2`,
@@ -15,34 +15,34 @@ const style = {
   time: `text-[10px] md:text-xs text-black`, // Adjusted font size
   priceContainer: `flex items-center`,
   price: `mr-[-0.5rem] md:mr-[-0.8rem]`, // Adjusted margin for smaller screens
-}
+};
 
 const RideSelector = () => {
-  const [carList, setCarList] = useState([])
+  const [carList, setCarList] = useState([]);
   const { selectedRide, setSelectedRide, setPrice, basePrice } =
-    useContext(RideContext)
+    useContext(RideContext);
 
-  console.log(basePrice, 'basePrice')
+  console.log(basePrice, "basePrice");
 
   useEffect(() => {
-    ;(async () => {
+    (async () => {
       try {
-        console.log('fetching ride types')
-        const response = await fetch('/api/db/getRideTypes')
+        console.log("fetching ride types");
+        const response = await fetch("/api/db/getRideTypes");
+        console.log("response: ", response);
 
-        const data = await response.json()
-        console.log('data', data)
-        setCarList(data.data)
-        setSelectedRide(data.data[0])
+        const data = await response.json();
+        console.log("data", data);
+        setCarList(data.data);
+        setSelectedRide(data.data[0]);
       } catch (error) {
-        console.error(error)
+        console.error(error);
       }
-    })()
-  }, [])
+    })();
+  }, []);
 
   return (
     <div className={style.wrapper}>
-      {/* <h1 className='border-2 text-lg'>ByeBug</h1> */}
       <div className={style.title}>Choose a ride, or swipe up for more</div>
       <div className={style.carList}>
         {carList.map((car, index) => (
@@ -54,8 +54,10 @@ const RideSelector = () => {
                 : style.car
             }`}
             onClick={() => {
-              setSelectedRide(car)
-              setPrice(((basePrice / 10 ** 6) * car.priceMultiplier).toFixed(5))
+              setSelectedRide(car);
+              setPrice(
+                ((basePrice / 10 ** 6) * car.priceMultiplier).toFixed(5)
+              );
             }}
           >
             <Image
@@ -63,7 +65,7 @@ const RideSelector = () => {
               className={style.carImage}
               height={50}
               width={50}
-              alt='image'
+              alt="image"
             />
             <div className={style.carDetails}>
               <div className={style.service}>{car.service}</div>
@@ -73,13 +75,13 @@ const RideSelector = () => {
               <div className={style.price}>
                 {((basePrice / 10 ** 6) * car.priceMultiplier).toFixed(5)}
               </div>
-              <Image src={ethLogo} height={25} width={40}  alt='image'/>
+              <Image src={ethLogo} height={25} width={40} alt="image" />
             </div>
           </div>
         ))}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default RideSelector
+export default RideSelector;

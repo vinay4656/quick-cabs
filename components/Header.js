@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
+import { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,7 +13,7 @@ export default function Header() {
     <header className="bg-white text-black font-jeko shadow-md">
       <nav className="container mx-auto px-6 py-4 flex justify-between items-center max-w-7xl">
         <div className="flex items-center space-x-4">
-          <Image 
+          <Image
             src="/images/logo.svg"
             alt="QuickCabs Logo"
             width={180}
@@ -25,11 +25,6 @@ export default function Header() {
           <Link href="/login" legacyBehavior>
             <button className="transition duration-300 text-black hover:text-gray-500 hover:underline focus:outline-none">
               Log in
-            </button>
-          </Link>
-          <Link href="/signup" legacyBehavior>
-            <button className="bg-[#CCFF00] text-black px-6 py-2 rounded transition duration-300 hover:bg-[#A5CD1B] hover:text-white focus:outline-none">
-              Sign up
             </button>
           </Link>
         </div>
@@ -45,9 +40,19 @@ export default function Header() {
             stroke="currentColor"
           >
             {isOpen ? (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
             ) : (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 12h16m-7 6h7"
+              />
             )}
           </svg>
         </button>
