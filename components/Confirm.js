@@ -58,6 +58,7 @@ const Confirm = () => {
   }
 
   console.log({ pickup, dropoff, price, selectedRide });
+  console.log(pickupCoordinates, dropoffCoordinates);
 
   return (
     <div className={style.wrapper}>
