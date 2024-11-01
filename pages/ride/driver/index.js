@@ -34,11 +34,11 @@ const Dashboard = () => {
             </div>
 
             {/* Referral Card */}
-            <div className="bg-black text-white rounded-xl p-8">
+            <div className="bg-gradient-to-bl from-[#C1F11D] to-teal-100 text-black rounded-xl p-8">
               <div className="mb-6">
-                <p className="text-lg">Connect to your wallet</p>
+                <p className="text-lg font-semibold">Connect to your wallet</p>
               </div>
-              <div className="flex items-center gap-2 bg-gray-800 rounded-lg p-3">
+              <div className="flex items-center gap-2 bg-white/40 border border-white rounded-lg p-3">
                 <span className="flex-grow">0xD1873F8B9916148Aae6A145A052F5be</span>
                 <button className="p-2">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
