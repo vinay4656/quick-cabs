@@ -27,11 +27,11 @@ const Works = () => {
           </p>
           
           <button 
-            className="bg-lime-300 px-6 py-3 rounded font-semibold text-gray-800 hover:bg-lime-400 transition-colors"
-            onClick={() => window.location.href = '/get-started'}
-          >
-            Get Started
-          </button>
+              onClick={() => window.location.href = '/ride'}
+              className="px-8 py-3 bg-[#CCFF00] text-black font-semibold rounded-lg hover:bg-[#A5CD1B] transition-all"
+            >
+              Book a Ride
+            </button>
         </div>
       </section>
     </div>
