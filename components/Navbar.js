@@ -4,7 +4,7 @@ import { BsPerson } from 'react-icons/bs'
 import { useContext } from 'react'
 import { RideContext } from '../context/RideContext'
 import logoImage from '../temp/logo.svg'
-
+import Link from 'next/link'
 const style = {
   wrapper: `h-16 w-full bg-white text-black flex flex-col md:flex-row md:justify-start items-center px-4 md:px-60 fixed z-20`,
   leftMenu: `flex gap-2 md:gap-3 flex-1`,
@@ -33,7 +33,9 @@ const Navbar = () => {
             // objectFit="contain"
           />
         </div>
-        <div className={style.menuItem}>Ride History</div>
+        <div className={style.menuItem}>
+          <Link href="/ride/history">Ride History</Link>
+        </div>
         {/* <div className={style.menuItem}>Transactions</div>
         <div className={style.menuItem}>More</div> */}
       </div>

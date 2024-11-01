@@ -23,6 +23,8 @@ const RideSelector = () => {
     useContext(RideContext);
 
   console.log(basePrice, "basePrice");
+  console.log(carList, "carList");
+  
 
   useEffect(() => {
     (async () => {
