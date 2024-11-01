@@ -30,7 +30,7 @@ const Navbar = () => {
             alt="QuickCabs Logo"
             height={40}
             width={120}
-            objectFit="contain"
+            // objectFit="contain"
           />
         </div>
         <div className={style.menuItem}>Ride History</div>

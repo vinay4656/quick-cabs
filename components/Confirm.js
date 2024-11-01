@@ -27,31 +27,31 @@ const Confirm = () => {
 
   const storeTripDetails = async (pickup, dropoff) => {
     try {
-      await fetch('/api/db/saveTrips', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          pickupLocation: pickup,
-          dropoffLocation: dropoff,
-          userWalletAddress: currentAccount,
-          price: price,
-          selectedRide: selectedRide,
-        }),
-      })
+      // await fetch('/api/db/saveTrips', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   body: JSON.stringify({
+      //     pickupLocation: pickup,
+      //     dropoffLocation: dropoff,
+      //     userWalletAddress: currentAccount,
+      //     price: price,
+      //     selectedRide: selectedRide,
+      //   }),
+      // })
 
-      await metamask.request({
-        method: 'eth_sendTransaction',
-        params: [
-          {
-            from: currentAccount,
-            to: process.env.NEXT_PUBLIC_QuickCabs_ADDRESS,
-            gas: '0x7EF40', // 520000 Gwei
-            value: ethers.utils.parseEther(price)._hex,
-          },
-        ],
-      })
+      // await metamask.request({
+      //   method: 'eth_sendTransaction',
+      //   params: [
+      //     {
+      //       from: currentAccount,
+      //       to: process.env.NEXT_PUBLIC_QuickCabs_ADDRESS,
+      //       gas: '0x7EF40', // 520000 Gwei
+      //       value: ethers.utils.parseEther(price)._hex,
+      //     },
+      //   ],
+      // })
     } catch (error) {
       console.error(error)
     }
