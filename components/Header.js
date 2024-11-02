@@ -22,11 +22,7 @@ export default function Header() {
           />
         </div>
         <div className="hidden md:flex space-x-8">
-          <Link href="/login" legacyBehavior>
-            <button className="transition duration-300 text-[#323942] hover:text-[#000000]  focus:outline-none">
-              Log in
-            </button>
-          </Link>
+          
         </div>
         <button
           className="md:hidden text-black focus:outline-none"

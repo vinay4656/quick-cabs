@@ -1,7 +1,8 @@
 import RideSelector from "./RideSelector";
 import { useContext } from "react";
 import { RideContext } from "../context/RideContext";
-import { ethers } from "ethers";
+import { transferPyUSD } from "../lib/transferPyusd";
+import { useRouter } from "next/router";
 
 const style = {
   wrapper: `flex-1 h-full flex flex-col justify-between`,
@@ -23,6 +24,7 @@ const Confirm = () => {
     dropoffCoordinates,
     metamask,
   } = useContext(RideContext);
+  const router = useRouter();
 
   const storeTripDetails = async (pickup, dropoff) => {
     try {
@@ -35,21 +37,13 @@ const Confirm = () => {
           pickupLocation: pickup,
           dropoffLocation: dropoff,
           userWalletAddress: currentAccount,
-          price: price,
+          price: price * 10 ** 10,
           selectedRide: selectedRide,
         }),
       });
 
-      await metamask.request({
-        method: "eth_sendTransaction",
-        params: [
-          {
-            from: currentAccount,
-            to: process.env.NEXT_PUBLIC_UBER_ADDRESS,
-            gas: "0x7EF40", // 520000 Gwei
-            value: ethers.utils.parseEther(price)._hex,
-          },
-        ],
+      await transferPyUSD(price * 10 ** 4, metamask).then((res) => {
+        router.push("/ride/accepted");
       });
     } catch (error) {
       console.error(error);

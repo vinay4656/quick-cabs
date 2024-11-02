@@ -82,16 +82,16 @@ export default function Home() {
             <div className={style.locationItem}>
               <div className={`${style.locationDot} bg-teal-500`}></div>
               <div className={style.locationText}>
-                <div className="font-medium  text-sm">Union Coop Al - St. 78</div>
-                <div className="text-gray-500 text-sm">Street 78 - البرشاء - Barsha South-دبي</div>
+                <div className="font-medium  text-sm">Indira Nagar 1st Stage, Indiranagar, </div>
+                <div className="text-gray-500 text-sm">Bengaluru, Bengaluru Urban, Karnataka, India</div>
               </div>
             </div>
             <div className="border-l-2 border-dashed border-gray-300 h-4 ml-[5px]"></div>
             <div className={style.locationItem}>
               <div className={`${style.locationDot} bg-red-400`}></div>
               <div className={style.locationText}>
-                <div className="font-medium text-sm">Emaar Dubai Hills Estate</div>
-                <div className="text-gray-500 text-xs">36VW+042 Hills Estate Sales Pavilion</div>
+                <div className="font-medium text-sm">Koramangala, Bengaluru</div>
+                <div className="text-gray-500 text-xs">Bengaluru Urban, Karnataka, India</div>
               </div>
             </div>
           </div>

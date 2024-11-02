@@ -1,5 +1,5 @@
 import Image from "next/image";
-import ethLogo from "../assets/eth-logo.png";
+import pyusd from "../assets/pyusd-logo.png";
 import { useEffect, useContext, useState } from "react";
 import { RideContext } from "../context/RideContext";
 
@@ -75,9 +75,11 @@ const RideSelector = () => {
             </div>
             <div className={style.priceContainer}>
               <div className={style.price}>
-                {((basePrice / 10 ** 6) * car.priceMultiplier).toFixed(5)}
+                {((basePrice / 10 ** 2) * car.priceMultiplier).toFixed(2)}
               </div>
-              <Image src={ethLogo} height={25} width={40} alt="image" />
+              <div className="p-2 ml-2">
+                <Image src={pyusd} alt="pyusd" height={20} width={20} />
+              </div>
             </div>
           </div>
         ))}
